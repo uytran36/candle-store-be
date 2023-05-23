@@ -1,10 +1,9 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
-import { AppController } from './app.controller';
+import { MiddlewareConsumer, Module, ValidationPipe } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
-import { LoggerMiddleware } from 'utils/middleware/logger.middleware';
-import { HttpExceptionFilter } from 'utils/http-exception.filter';
-import { ValidationPipe } from 'utils/pipe/validation.pipe';
+import { HttpExceptionFilter } from './utils/http-exception.filter';
+import { LoggerMiddleware } from './utils/middleware/logger.middleware';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -12,8 +11,9 @@ import { ValidationPipe } from 'utils/pipe/validation.pipe';
       envFilePath: '.env',
       isGlobal: true,
     }),
+    UsersModule,
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [
     AppService,
     {
